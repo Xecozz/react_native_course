@@ -4,7 +4,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Link, router } from "expo-router";
 import { images } from "../../constants";
-import { creatUser } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
+import { createUser } from "../../lib/appwrite";
 import CustomButton from "../components/CustomButton";
 import FormField from "../components/FormField";
 
@@ -15,22 +16,25 @@ const SignUp = () => {
     password: "",
   });
 
-  const [isSubmitting, setisSubmitting] = useState(false);
+  const { setUser, setIsLogged } = useGlobalContext();
+  const [isSubmitting, setSubmitting] = useState(false);
 
   const submit = async () => {
-    if (!form.username || !form.email || !form.password)
-      Alert.alert("Error", "All fields are required");
+    if (form.username === "" || form.email === "" || form.password === "") {
+      Alert.alert("Error", "Please fill in all fields");
+    }
 
-    setisSubmitting(true);
-
+    setSubmitting(true);
     try {
-      const result = await creatUser(form.email, form.password, form.username);
+      const result = await createUser(form.email, form.password, form.username);
+      setUser(result);
+      setIsLogged(true);
 
       router.replace("/home");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
-      setisSubmitting(false);
+      setSubmitting(false);
     }
   };
 
