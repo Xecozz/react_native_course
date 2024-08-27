@@ -1,3 +1,5 @@
+import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
+import "@/global.css";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
@@ -38,14 +40,19 @@ const RootLayout = () => {
   }
 
   return (
-    <GlobalProvider>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
-      </Stack>
-    </GlobalProvider>
+    <GluestackUIProvider mode="dark">
+      <GlobalProvider>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="search/[query]"
+            options={{ headerShown: false }}
+          />
+        </Stack>
+      </GlobalProvider>
+    </GluestackUIProvider>
   );
 };
 

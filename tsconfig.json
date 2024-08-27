@@ -2,7 +2,12 @@
   "compilerOptions": {
     "strict": false,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
   },
   "extends": "expo/tsconfig.base"
 }
