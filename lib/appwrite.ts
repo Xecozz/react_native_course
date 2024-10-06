@@ -1,3 +1,4 @@
+import { config as dotenvConfig } from "dotenv";
 import {
   Account,
   Avatars,
@@ -8,14 +9,16 @@ import {
   Storage,
 } from "react-native-appwrite";
 
+dotenvConfig();
+
 export const config = {
-  endpoint: "https://cloud.appwrite.io/v1",
-  platform: "com.jsm.aora",
-  projectId: "66796fe900010d83626f",
-  databaseId: "667970fc00122ca6f5ca",
-  userCollectionId: "667971240022471195bf",
-  videoCollectionId: "66797168000a05c01943",
-  storageId: "667972760021c1e6eb3d",
+  endpoint: process.env.APPWRITE_ENDPOINT || "",
+  platform: process.env.APPWRITE_PLATFORM || "",
+  projectId: process.env.APPWRITE_PROJECT_ID || "",
+  databaseId: process.env.APPWRITE_DATABASE_ID || "",
+  userCollectionId: process.env.APPWRITE_USER_COLLECTION_ID || "",
+  videoCollectionId: process.env.APPWRITE_VIDEO_COLLECTION_ID || "",
+  storageId: process.env.APPWRITE_STORAGE_ID || "",
 };
 
 const {
